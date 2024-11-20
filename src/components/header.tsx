@@ -6,6 +6,7 @@ import Logo from '@/components/logo';
 import {usePathname} from 'next/navigation';
 import clsx from 'clsx';
 import {motion} from 'framer-motion';
+import {cn} from '@/lib/utils';
 
 const routes = [
 	{
@@ -33,10 +34,13 @@ const Header = () => {
 						return (
 							<li
 								key={route.path}
-								className={clsx('flex items-center hover:text-white transition relative', {
+								className={cn(
+									'flex items-center hover:text-white transition relative',
+									{
 									'text-white': activePath === route.path,
 									'text-white/50': activePath !== route.path
-								})}
+									}
+								)}
 							><Link href={route.path}>{route.name}</Link>
 								{activePath === route.path &&
                                     <motion.div layoutId={'nav-buttons'} className={'bg-accent h-1 w-full absolute bottom-0'}></motion.div>}
