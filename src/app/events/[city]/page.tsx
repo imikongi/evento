@@ -12,7 +12,7 @@ const Events = async ({params}: {params: Record<'city', string>}) => {
     
     return (
         <main className={'flex flex-col items-center h-full py-24 px-[20px] min-h-[110vh]'}>
-           <H1>
+           <H1 className={'mb-28'}>
                {
                    city === 'all'
                    ? 'All events'

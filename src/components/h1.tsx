@@ -1,8 +1,14 @@
 import React from 'react';
+import {twMerge} from 'tailwind-merge';
 
-const H1 = ({children}: {children: React.ReactNode}) => {
+interface H1Props {
+	children: React.ReactNode;
+	className?: string;
+}
+
+const H1: React.FunctionComponent<H1Props> = ({children, className}) => {
 	return (
-		<h1 className={'text-3xl lg:text-6xl font-bold tracking-tight'}>{children}</h1>
+		<h1 className={twMerge('text-3xl lg:text-6xl font-bold tracking-tight', className)}>{children}</h1>
 	);
 };
 
