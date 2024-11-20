@@ -6,7 +6,7 @@ import EventsList from '@/components/eventslist';
 const Events = async ({params}: {params: Record<'city', string>}) => {
     const city = params.city
     
-    const response = await fetch('https://bytegrad.com/course-assets/projects/evento/api/events?city=austin')
+    const response = await fetch(`https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`)
     const events: EventInfo[] = await response.json();
     
     return (
