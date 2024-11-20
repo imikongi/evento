@@ -1,7 +1,6 @@
 import React from 'react';
 import H1 from '@/components/h1';
 import {EventInfo} from '@/lib/types';
-import Eventslist from '@/components/eventslist';
 import EventsList from '@/components/eventslist';
 
 const Events = async ({params}: {params: Record<'city', string>}) => {
