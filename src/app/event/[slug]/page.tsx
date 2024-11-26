@@ -56,7 +56,7 @@ const EventPage: React.FunctionComponent<EventPageProps> = async ({params}) => {
                             </p>
                         </div>
                         <button className={'bg-white/20 bg-blur text-lg capitalize mt-5 w-[95%] ' +
-                            'sm:w-[full] py-2 rounded-md border-white/10 border-2 hover:scale-105 focus:active:scale-[1.02] transition '}>
+                            'sm:w-[full] py-2 rounded-md border-white/10 border-2 state-effects'}>
                             Get tickets
                         </button>
                     </div>
@@ -64,11 +64,21 @@ const EventPage: React.FunctionComponent<EventPageProps> = async ({params}) => {
             </section>
             
             
-            <div>
-            
+            <div className={'min-h-[75vh] flex flex-col items-center gap-10  text-center px-5 py-16'}>
+                <Section sectionTitle={'About this event'} sectionDescription={event.description}/>
+                <Section sectionTitle={'Location'} sectionDescription={event.location}/>
             </div>
         </main>
     );
 };
+
+function Section({sectionTitle, sectionDescription}: {sectionTitle: string, sectionDescription: string}) {
+    return (
+        <section>
+            <h2 className={'text-2xl mb-8'}>{sectionTitle}</h2>
+            <p className={'max-w-4xl text-lg leading-8 text-white/75'}>{sectionDescription}</p>
+        </section>
+    )
+}
 
 export default EventPage;

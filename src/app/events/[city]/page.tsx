@@ -1,13 +1,11 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import H1 from '@/components/h1';
 import {EventInfo} from '@/lib/types';
 import EventsList from '@/components/eventslist';
+import Loading from '@/app/events/loading';
 
 const Events = async ({params}: {params: Record<'city', string>}) => {
     const city = params.city
-    
-    const response = await fetch(`https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`)
-    const events: EventInfo[] = await response.json();
     
     return (
         <main className={'flex flex-col items-center h-full py-24 px-[20px] min-h-[110vh]'}>
@@ -19,7 +17,9 @@ const Events = async ({params}: {params: Record<'city', string>}) => {
                }
            </H1>
             
-           <EventsList events={events}/>
+           <Suspense fallback={<Loading/>}>
+               <EventsList city={city}/>
+           </Suspense>
         </main>
     );
 };

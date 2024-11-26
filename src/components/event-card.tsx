@@ -13,14 +13,14 @@ const EventCard: React.FunctionComponent<EventCardProps> = ({event}) => {
 	return (
 		<Link className={'max-h-[23.75rem] flex-1 basis-80 max-w-[31.25rem]'} href={`/event/${event.slug}`}>
 			<section className={
-				'w-full h-full relative flex flex-col bg-white/[3%] rounded-xl overflow-hidden hover:scale-105 active:scale-[1.02] transition'
+				'w-full h-full relative flex flex-col bg-white/[3%] rounded-xl overflow-hidden state-effects'
 			}>
 				<Image
 					src={event.imageUrl}
 					alt={event.name}
 					width={500}
 					height={280}
-					className={'h-[60%] object-fit'}/>
+					className={'h-[60%] object-cover'}/>
 				
 				<section
 					className={'flex flex-col justify-center items-center absolute left-[12px] top-[12px] h-[45px] w-[45px] bg-black/30 rounded-md'}>
