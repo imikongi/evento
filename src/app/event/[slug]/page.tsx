@@ -2,14 +2,27 @@ import React from 'react';
 import {EventInfo} from '@/lib/types';
 import Image from 'next/image'
 import H1 from '@/components/h1';
+import {capitalizeFirst} from '@/lib/utils';
+import {Metadata} from 'next';
 
-interface EventPageProps {
+interface Props {
     params: {
         slug: string;
     }
 }
 
-const EventPage: React.FunctionComponent<EventPageProps> = async ({params}) => {
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+    const slug = params.slug;
+    
+    const response = await fetch(`https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`)
+    const event: EventInfo = await response.json();
+    
+    return {
+        title: event.name
+    }
+}
+
+const EventPage: React.FunctionComponent<Props> = async ({params}) => {
     const slug = params.slug
     const response = await fetch(`https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`)
     const event: EventInfo = await response.json();

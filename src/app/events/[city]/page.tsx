@@ -3,8 +3,24 @@ import H1 from '@/components/h1';
 import {EventInfo} from '@/lib/types';
 import EventsList from '@/components/eventslist';
 import Loading from '@/app/events/loading';
+import {capitalizeFirst} from '@/lib/utils';
+import {Metadata} from 'next';
 
-const Events = async ({params}: {params: Record<'city', string>}) => {
+interface Props {
+    params: {
+        city: string
+    }
+}
+
+export function generateMetadata({params}: Props): Metadata {
+    const city = params.city;
+    
+    return {
+        title: city === 'all' ? 'All events' : `Events in ${capitalizeFirst(city)}`
+    }
+}
+
+const Events = async ({params}: Props) => {
     const city = params.city
     
     return (
@@ -13,7 +29,7 @@ const Events = async ({params}: {params: Record<'city', string>}) => {
                {
                    city === 'all'
                    ? 'All events'
-                   : `Events in ${city[0].toUpperCase() + city.slice(1)}`
+                   : `Events in ${capitalizeFirst(city)}`
                }
            </H1>
             
