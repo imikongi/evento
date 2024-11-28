@@ -1,6 +1,5 @@
 import React, {Suspense} from 'react';
 import H1 from '@/components/h1';
-import {EventInfo} from '@/lib/types';
 import EventsList from '@/components/eventslist';
 import Loading from '@/app/events/loading';
 import {capitalizeFirst} from '@/lib/utils';

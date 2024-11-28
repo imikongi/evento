@@ -1,3 +1,4 @@
+
 export type EventInfo = {
 	id: number,
 	name: string,
