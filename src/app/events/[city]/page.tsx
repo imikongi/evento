@@ -4,11 +4,17 @@ import EventsList from '@/components/eventslist';
 import Loading from '@/app/events/loading';
 import {capitalizeFirst} from '@/lib/utils';
 import {Metadata} from 'next';
+import {z} from 'zod';
+import * as sea from 'node:sea';
 
 interface Props {
     params: {
         city: string
     }
+}
+
+interface EventsPageProps extends Props {
+    searchParams: {[key: string]: string | string[] | undefined};
 }
 
 export function generateMetadata({params}: Props): Metadata {
@@ -19,8 +25,13 @@ export function generateMetadata({params}: Props): Metadata {
     }
 }
 
-const Events = async ({params}: Props) => {
+const pageNumberSchema = z.coerce.number().int().positive().optional()
+
+const Events = async ({params, searchParams}: EventsPageProps) => {
     const city = params.city
+    const parsedPage = pageNumberSchema.safeParse(searchParams.page)
+    if(!parsedPage.success) {
+        throw new Error('Invalid page number.')    }
     
     return (
         <main className={'flex flex-col items-center h-full py-24 px-[20px] min-h-[110vh]'}>
@@ -32,8 +43,8 @@ const Events = async ({params}: Props) => {
                }
            </H1>
             
-           <Suspense fallback={<Loading/>}>
-               <EventsList city={city}/>
+           <Suspense key={city + parsedPage.data} fallback={<Loading/>}>
+               <EventsList city={city} page={parsedPage.data}/>
            </Suspense>
         </main>
     );
