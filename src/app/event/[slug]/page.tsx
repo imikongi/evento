@@ -10,6 +10,7 @@ interface Props {
     }
 }
 
+//function for generating names in tab
 export async function generateMetadata({params}: Props): Promise<Metadata> {
     const slug = params.slug;
     
@@ -19,6 +20,17 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
         title: event.name
     }
 }
+//this function highlights routes, that we want to make static
+export async function generateStaticParams(){
+    return [{
+        slug: 'comedy-extravaganza'
+    },
+        {
+            slug: 'dj-practice-session'
+        }]
+}
+
+
 
 const EventPage: React.FunctionComponent<Props> = async ({params}) => {
     const slug = params.slug
